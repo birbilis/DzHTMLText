@@ -1019,6 +1019,9 @@ begin
   C := Canvas;
   {$ENDIF}
 
+   C.Lock;
+   try
+
     //draw background color
     {$IFDEF FMX}
     if Color<>clNone then
@@ -1136,6 +1139,10 @@ begin
       else
         raise EInternalExcept.Create('Invalid visual item object');
     end;
+
+   finally
+     C.Unlock;
+   end;
 
   {$IFDEF VCL}
     Canvas.Draw(0, 0, B);
